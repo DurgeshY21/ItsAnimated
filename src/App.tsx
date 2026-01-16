@@ -10,6 +10,7 @@ import Inputs from './pages/Inputs';
 import Interactions from './pages/Interactions';
 import InteractionDetail from './pages/InteractionDetail';
 import ButtonDetail from './pages/ButtonDetail';
+import CardDetail from './pages/CardDetail';
 import Showcase from './pages/Showcase';
 import Pricing from './pages/Pricing';
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/buttons" element={<Buttons />} />
             <Route path="/buttons/:id" element={<ButtonDetail />} />
             <Route path="/cards" element={<Cards />} />
+            <Route path="/cards/:id" element={<CardDetail />} />
             <Route path="/inputs" element={<Inputs />} />
             <Route path="/interactions" element={<Interactions />} />
             <Route path="/interactions/:id" element={<InteractionDetail />} />
