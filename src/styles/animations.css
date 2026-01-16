@@ -1,0 +1,671 @@
+/* Animations */
+
+@keyframes shimmer {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes wiggle {
+
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes bounce-right {
+
+    0%,
+    100% {
+        transform: translateX(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+        transform: translateX(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+        transform: none;
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+@keyframes bounce-subtle {
+
+    0%,
+    100% {
+        transform: translateY(-5%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    100% {
+        transform: translate(100%, -100%);
+        opacity: 0;
+    }
+}
+
+@keyframes typing {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes wifi-fade {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+@keyframes charge {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes swing {
+    20% {
+        transform: rotate3d(0, 0, 1, 15deg);
+    }
+
+    40% {
+        transform: rotate3d(0, 0, 1, -10deg);
+    }
+
+    60% {
+        transform: rotate3d(0, 0, 1, 5deg);
+    }
+
+    80% {
+        transform: rotate3d(0, 0, 1, -5deg);
+    }
+
+    to {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+
+/* Interactive Utilities */
+.hover-glow {
+    transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    transform: translateY(-5px);
+}
+
+/* Icon Classes */
+/* Base Dimensions */
+[class^="icon-"],
+[class*=" icon-"] {
+    width: 24px;
+    height: 24px;
+}
+
+/* Specific Icons */
+.icon-heart {
+    color: #ef4444;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.icon-settings {
+    animation: spin 3s linear infinite;
+}
+
+.icon-loading {
+    color: #2563eb;
+    animation: spin 1s linear infinite;
+}
+
+.icon-bell {
+    animation: swing 2s ease-in-out infinite;
+}
+
+.icon-arrow-right {
+    animation: bounce-right 1s infinite;
+}
+
+.icon-cloud {
+    color: #60a5fa;
+    animation: float 3s ease-in-out infinite;
+}
+
+.icon-menu {
+    transition: transform 0.3s;
+}
+
+.icon-menu:hover {
+    transform: rotate(90deg);
+}
+
+.icon-trash {
+    /* Base style */
+}
+
+.icon-trash:hover {
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+.icon-check {
+    color: #22c55e;
+    animation: bounce 1s infinite;
+}
+
+.icon-send {
+    /* Base style */
+}
+
+.icon-send:hover {
+    animation: fly 0.6s ease-in-out forwards;
+}
+
+/* Complex Icons (Children) */
+.icon-typing .dot {
+    animation: typing 1s infinite;
+}
+
+.icon-typing .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.icon-typing .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.icon-wifi .wifi-bar {
+    animation: wifi-fade 1.5s infinite;
+}
+
+.icon-wifi .wifi-bar:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.icon-wifi .wifi-bar:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.icon-mic-wrapper {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+}
+
+.icon-mic-wrapper .ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    background-color: #f87171;
+    opacity: 0.75;
+    animation: pulse-ring 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.icon-mic {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-battery {
+    color: #22c55e;
+}
+
+.icon-battery .battery-level {
+    animation: charge 2s steps(4) infinite;
+}
+
+/* New Icons */
+.icon-home:hover {
+    animation: bounce-subtle 1s infinite;
+}
+
+.icon-user {
+    transition: transform 0.2s;
+}
+
+.icon-user:hover {
+    transform: scale(1.1);
+}
+
+.icon-search {
+    transition: transform 0.3s;
+}
+
+.icon-search:hover {
+    transform: scale(1.25);
+}
+
+.icon-close {
+    transition: transform 0.3s;
+}
+
+.icon-close:hover {
+    transform: rotate(90deg);
+}
+
+.icon-arrow-left {
+    transition: transform 0.3s;
+}
+
+.icon-arrow-left:hover {
+    transform: translateX(-8px);
+}
+
+.icon-arrow-up {
+    transition: transform 0.3s;
+}
+
+.icon-arrow-up:hover {
+    transform: translateY(-8px);
+}
+
+.icon-arrow-down {
+    transition: transform 0.3s;
+}
+
+.icon-arrow-down:hover {
+    transform: translateY(8px);
+}
+
+.icon-chevron-down:hover {
+    animation: bounce 1s infinite;
+}
+
+.icon-link {
+    transition: transform 0.3s;
+}
+
+.icon-link:hover {
+    transform: rotate(12deg);
+}
+
+.icon-logout {
+    transition: transform 0.3s;
+}
+
+.icon-logout:hover {
+    transform: translateX(4px);
+}
+
+.icon-mail {
+    transition: transform 0.3s;
+}
+
+.icon-mail:hover {
+    transform: translateY(-4px);
+}
+
+.icon-phone:hover {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+.icon-chat {
+    transition: transform 0.3s;
+}
+
+.icon-chat:hover {
+    transform: scale(1.1);
+}
+
+.icon-share {
+    transition: transform 0.3s;
+}
+
+.icon-share:hover {
+    transform: scale(1.1);
+}
+
+.icon-thumbs-up {
+    transition: transform 0.3s;
+}
+
+.icon-thumbs-up:hover {
+    transform: rotate(-12deg);
+}
+
+.icon-star {
+    transition: color 0.3s, fill 0.3s;
+}
+
+.icon-star:hover {
+    color: #facc15;
+    fill: currentColor;
+}
+
+.icon-map-pin:hover {
+    animation: bounce 1s infinite;
+}
+
+.icon-globe {
+    transition: transform 0.3s;
+}
+
+.icon-globe:hover {
+    transform: rotate(12deg);
+}
+
+.icon-play {
+    transition: transform 0.3s;
+}
+
+.icon-play:hover {
+    transform: scale(1.1);
+}
+
+.icon-pause {
+    transition: transform 0.3s;
+}
+
+.icon-pause:hover {
+    transform: scale(1.1);
+}
+
+.icon-volume:hover {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-camera:hover {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-image {
+    transition: transform 0.3s;
+}
+
+.icon-image:hover {
+    transform: scale(1.1);
+}
+
+.icon-music:hover {
+    animation: bounce 1s infinite;
+}
+
+.icon-cart {
+    transition: transform 0.3s;
+}
+
+.icon-cart:hover {
+    transform: translateX(-4px);
+}
+
+.icon-tag {
+    transition: transform 0.3s;
+}
+
+.icon-tag:hover {
+    transform: rotate(-12deg);
+}
+
+.icon-gift:hover {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+.icon-pencil {
+    transition: transform 0.3s;
+}
+
+.icon-pencil:hover {
+    transform: translate(4px, -4px);
+}
+
+.icon-save {
+    transition: transform 0.3s;
+}
+
+.icon-save:hover {
+    transform: scale(1.1);
+}
+
+.icon-download:hover {
+    animation: bounce 1s infinite;
+}
+
+.icon-upload:hover {
+    animation: bounce 1s infinite;
+}
+
+.icon-info {
+    transition: transform 0.3s;
+}
+
+.icon-info:hover {
+    transform: scale(1.1);
+}
+
+.icon-help:hover {
+    animation: bounce 1s infinite;
+}
+
+.icon-warning {
+    color: #eab308;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-lock:hover {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+.icon-unlock {
+    transition: transform 0.3s;
+}
+
+.icon-unlock:hover {
+    transform: translateY(-4px);
+}
+
+.icon-eye {
+    transition: transform 0.3s;
+}
+
+.icon-eye:hover {
+    transform: scale(1.1);
+}
+
+.icon-eye-off {
+    transition: transform 0.3s;
+}
+
+.icon-eye-off:hover {
+    transform: scale(1.1);
+}
+
+.icon-calendar {
+    transition: transform 0.3s;
+}
+
+.icon-calendar:hover {
+    transform: translateX(4px);
+}
+
+.icon-clock {
+    transition: transform 0.5s;
+}
+
+.icon-clock:hover {
+    transform: rotate(90deg);
+}
+
+.icon-sun {
+    color: #eab308;
+    animation: spin 4s linear infinite;
+}
+
+.icon-moon {
+    color: #818cf8;
+}
+
+.icon-moon:hover {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+.icon-rain:hover {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-lightning {
+    color: #eab308;
+    animation: pulse 0.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-filter {
+    transition: transform 0.3s;
+}
+
+.icon-filter:hover {
+    transform: scale(1.1);
+}
+
+.icon-sort {
+    transition: transform 0.3s;
+}
+
+.icon-sort:hover {
+    transform: translateY(4px);
+}
+
+.icon-folder {
+    transition: transform 0.3s;
+}
+
+.icon-folder:hover {
+    transform: scale(1.05);
+}
+
+.icon-document {
+    transition: transform 0.3s;
+}
+
+.icon-document:hover {
+    transform: translateY(-4px);
+}
+
+.icon-printer:hover {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-rocket {
+    transition: transform 0.3s;
+}
+
+.icon-rocket:hover {
+    transform: translate(4px, -4px);
+}
