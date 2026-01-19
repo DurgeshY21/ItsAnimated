@@ -116,3 +116,41 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/* Card Detail Scrollbar - Hidden by default, visible on scroll/hover (Light Grey) */
+.card-scrollbar {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(156, 163, 175, 0.4) transparent; /* Light grey */
+}
+
+.card-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.card-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.4);
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.card-scrollbar:hover::-webkit-scrollbar-thumb {
+    opacity: 1;
+}
+
+.card-scrollbar.scrolling::-webkit-scrollbar-thumb {
+    opacity: 1;
+}
+
+.dark .card-scrollbar {
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.dark .card-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.5);
+}

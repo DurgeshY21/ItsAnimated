@@ -9,6 +9,7 @@ const IconDetails = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<'tailwind' | 'css'>('tailwind');
     const [copied, setCopied] = useState(false);
+    const [isScrolling, setIsScrolling] = useState(false);
 
     const icon = iconsData.find((i) => i.id === id);
 
@@ -32,99 +33,127 @@ const IconDetails = () => {
     return (
         <div className="pt-32 pb-24 min-h-screen bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-6">
+                {/* Back Button */}
                 <button
                     onClick={() => navigate('/icons')}
-                    className="mb-8 flex items-center text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                    className="mb-6 flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                 >
-                    <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    Back to Icons
+                    <span>Back to Icons</span>
                 </button>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Left Column: Icon Preview */}
-                    <div className="flex flex-col gap-6">
-                        <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-12 flex items-center justify-center min-h-[400px] relative overflow-hidden group">
-                            {/* Background decorative elements */}
-                            <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
-
-                            <div className="relative z-10 scale-[3] text-neutral-800 dark:text-neutral-200">
-                                {icon.icon}
-                            </div>
-                        </div>
-                        <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Left: Preview */}
+                    <div className="space-y-6">
+                        <div>
                             <h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">{icon.name}</h1>
                             <p className="text-neutral-600 dark:text-neutral-400">Category: <span className="font-medium text-primary-600 dark:text-primary-400">{icon.category}</span></p>
                         </div>
+                        
+                        <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-8 shadow-lg">
+                            <div className="flex items-center justify-center min-h-[400px] relative overflow-hidden">
+                                {/* Background decorative elements */}
+                                <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
+                                <div className="relative z-10 scale-[3] text-neutral-800 dark:text-neutral-200">
+                                    {icon.icon}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Right Column: Code & Actions */}
-                    <div className="flex flex-col h-full">
-                        <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 flex flex-col h-full overflow-hidden shadow-sm">
+                    {/* Right: Code Editor */}
+                    <div className="space-y-6">
+                        <div>
+                            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Code</h2>
+                            
                             {/* Tabs */}
-                            <div className="flex border-b border-neutral-200 dark:border-neutral-700">
+                            <div className="flex gap-2 mb-4">
                                 <button
-                                    className={`flex-1 py-4 text-sm font-medium transition-colors relative ${activeTab === 'tailwind'
-                                        ? 'text-primary-600 dark:text-primary-400'
-                                        : 'text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200'
-                                        }`}
                                     onClick={() => setActiveTab('tailwind')}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                                        activeTab === 'tailwind'
+                                            ? 'bg-primary-600 text-white'
+                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                    }`}
                                 >
-                                    Tailwind CSS
-                                    {activeTab === 'tailwind' && (
-                                        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600 dark:bg-primary-400" />
-                                    )}
+                                    Tailwind React
                                 </button>
                                 <button
-                                    className={`flex-1 py-4 text-sm font-medium transition-colors relative ${activeTab === 'css'
-                                        ? 'text-primary-600 dark:text-primary-400'
-                                        : 'text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200'
-                                        }`}
                                     onClick={() => setActiveTab('css')}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                                        activeTab === 'css'
+                                            ? 'bg-primary-600 text-white'
+                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                    }`}
                                 >
-                                    Vanilla CSS
-                                    {activeTab === 'css' && (
-                                        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600 dark:bg-primary-400" />
-                                    )}
+                                    Normal CSS
                                 </button>
                             </div>
 
-                            {/* Code Block */}
-                            <div className="relative flex-grow bg-[#1e1e1e] group">
-                                <div className="absolute top-4 right-4 z-10">
+                            {/* MacBook-style Code Editor */}
+                            <div className="bg-neutral-900 rounded-2xl overflow-hidden shadow-2xl">
+                                {/* MacBook Top Bar */}
+                                <div className="bg-neutral-800 px-4 py-3 flex items-center gap-2 border-b border-neutral-700">
+                                    <div className="flex gap-2">
+                                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div className="flex-1 text-center">
+                                        <span className="text-xs text-neutral-400">{activeTab === 'tailwind' ? 'Icon.tsx' : 'icon.css'}</span>
+                                    </div>
                                     <button
                                         onClick={handleCopy}
-                                        className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm border border-white/10"
-                                        title="Copy code"
+                                        className="ml-auto px-3 py-1.5 bg-neutral-700 hover:bg-neutral-600 rounded-lg text-xs text-white transition-colors flex items-center gap-2"
                                     >
                                         {copied ? (
-                                            <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
+                                            <>
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                Copied!
+                                            </>
                                         ) : (
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                            </svg>
+                                            <>
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                                </svg>
+                                                Copy
+                                            </>
                                         )}
                                     </button>
                                 </div>
-                                <div className="h-full overflow-auto custom-scrollbar">
+
+                                {/* Code Content */}
+                                <div 
+                                    className={`p-4 overflow-x-auto max-h-[600px] overflow-y-auto card-scrollbar ${isScrolling ? 'scrolling' : ''}`}
+                                    onScroll={(e) => {
+                                        setIsScrolling(true);
+                                        clearTimeout((window as any).scrollTimeout);
+                                        (window as any).scrollTimeout = setTimeout(() => {
+                                            setIsScrolling(false);
+                                        }, 1500);
+                                    }}
+                                    onMouseEnter={() => setIsScrolling(true)}
+                                    onMouseLeave={() => {
+                                        setTimeout(() => {
+                                            if (!(window as any).scrollTimeout) {
+                                                setIsScrolling(false);
+                                            }
+                                        }, 500);
+                                    }}
+                                >
                                     <SyntaxHighlighter
-                                        language={activeTab === 'tailwind' ? 'jsx' : 'css'}
+                                        language={activeTab === 'tailwind' ? 'tsx' : 'css'}
                                         style={vscDarkPlus}
                                         customStyle={{
                                             margin: 0,
-                                            padding: '1.5rem',
-                                            height: '100%',
-                                            fontSize: '0.9rem',
-                                            lineHeight: '1.5',
+                                            padding: 0,
                                             background: 'transparent',
-                                            whiteSpace: 'pre-wrap',       // Force text wrapping
-                                            wordBreak: 'break-word',      // Break long words if necessary
+                                            fontSize: '14px',
                                         }}
-                                        wrapLines={true}
-                                        wrapLongLines={true}
                                     >
                                         {activeTab === 'tailwind' ? (icon.code || '') : (icon.cssCode || '')}
                                     </SyntaxHighlighter>

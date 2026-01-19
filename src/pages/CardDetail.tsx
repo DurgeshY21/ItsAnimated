@@ -15,6 +15,7 @@ const CardDetail = () => {
     const [card, setCard] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [isScrolling, setIsScrolling] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -482,7 +483,24 @@ const CardDetail = () => {
                                 </div>
 
                                 {/* Code Content */}
-                                <div className="p-4 overflow-x-auto">
+                                <div 
+                                    className={`p-4 overflow-x-auto max-h-[600px] overflow-y-auto card-scrollbar ${isScrolling ? 'scrolling' : ''}`}
+                                    onScroll={(e) => {
+                                        setIsScrolling(true);
+                                        clearTimeout((window as any).scrollTimeout);
+                                        (window as any).scrollTimeout = setTimeout(() => {
+                                            setIsScrolling(false);
+                                        }, 1500);
+                                    }}
+                                    onMouseEnter={() => setIsScrolling(true)}
+                                    onMouseLeave={() => {
+                                        setTimeout(() => {
+                                            if (!(window as any).scrollTimeout) {
+                                                setIsScrolling(false);
+                                            }
+                                        }, 500);
+                                    }}
+                                >
                                     <SyntaxHighlighter
                                         language={activeTab === 'tailwind' ? 'tsx' : 'css'}
                                         style={vscDarkPlus}
