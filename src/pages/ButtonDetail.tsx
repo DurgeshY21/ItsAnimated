@@ -16,7 +16,7 @@ const ButtonDetail = () => {
     useEffect(() => {
         setLoading(true);
         setError(null);
-        
+
         const savedData = localStorage.getItem('buttonData');
         if (savedData) {
             try {
@@ -36,33 +36,33 @@ const ButtonDetail = () => {
         setLoading(false);
     }, [id]);
 
-    const generateCSSFromTailwind = (tailwindCode: string): string => {
+    const generateCSSFromTailwind = (_tailwindCode: string): string => {
         // If cssCode is already provided, use it
         if (button?.cssCode) {
             return button.cssCode;
         }
         // Otherwise return a generic CSS template
         return `/* CSS equivalent for ${button?.title || 'Button'} */\n\n` +
-               `/* Note: This is a simplified conversion. For full Tailwind to CSS conversion, use a tool like tailwindcss.com */\n\n` +
-               `.button {\n` +
-               `  /* Add your custom styles here based on the Tailwind classes */\n` +
-               `  padding: 0.75rem 2rem;\n` +
-               `  border-radius: 0.5rem;\n` +
-               `  font-weight: 500;\n` +
-               `  transition: all 0.3s ease;\n` +
-               `  cursor: pointer;\n` +
-               `}\n\n` +
-               `.button:hover {\n` +
-               `  /* Hover styles */\n` +
-               `}\n\n` +
-               `.button:active {\n` +
-               `  /* Active styles */\n` +
-               `}\n`;
+            `/* Note: This is a simplified conversion. For full Tailwind to CSS conversion, use a tool like tailwindcss.com */\n\n` +
+            `.button {\n` +
+            `  /* Add your custom styles here based on the Tailwind classes */\n` +
+            `  padding: 0.75rem 2rem;\n` +
+            `  border-radius: 0.5rem;\n` +
+            `  font-weight: 500;\n` +
+            `  transition: all 0.3s ease;\n` +
+            `  cursor: pointer;\n` +
+            `}\n\n` +
+            `.button:hover {\n` +
+            `  /* Hover styles */\n` +
+            `}\n\n` +
+            `.button:active {\n` +
+            `  /* Active styles */\n` +
+            `}\n`;
     };
 
     const handleCopy = () => {
-        const codeToCopy = activeTab === 'tailwind' 
-            ? button?.code 
+        const codeToCopy = activeTab === 'tailwind'
+            ? button?.code
             : (button?.cssCode || generateCSSFromTailwind(button?.code || ''));
         if (codeToCopy) {
             navigator.clipboard.writeText(codeToCopy);
@@ -73,7 +73,7 @@ const ButtonDetail = () => {
 
     const renderPreview = () => {
         if (!button) return null;
-        
+
         switch (button.id) {
             case 'btn-neu':
                 return (
@@ -259,7 +259,7 @@ const ButtonDetail = () => {
                     <div className="flex justify-center pointer-events-auto">
                         <button className="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center cursor-pointer hover:bg-blue-600 hover:scale-110 transition-all shadow-lg">
                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
                         </button>
                     </div>
@@ -284,7 +284,7 @@ const ButtonDetail = () => {
             case 'btn-angled':
                 return (
                     <div className="flex justify-center pointer-events-auto">
-                        <button className="px-8 py-3 bg-rose-600 text-white font-medium cursor-pointer hover:bg-rose-700 transition-colors shadow-lg" style={{clipPath: 'polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)'}}>
+                        <button className="px-8 py-3 bg-rose-600 text-white font-medium cursor-pointer hover:bg-rose-700 transition-colors shadow-lg" style={{ clipPath: 'polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)' }}>
                             Angled
                         </button>
                     </div>
@@ -300,7 +300,7 @@ const ButtonDetail = () => {
             case 'btn-sketch':
                 return (
                     <div className="flex justify-center pointer-events-auto">
-                        <button className="px-8 py-3 bg-white dark:bg-neutral-800 border-2 border-neutral-900 dark:border-white text-neutral-900 dark:text-white rounded-lg font-medium cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors" style={{borderRadius: '15px 5px 15px 5px / 5px 15px 5px 15px'}}>
+                        <button className="px-8 py-3 bg-white dark:bg-neutral-800 border-2 border-neutral-900 dark:border-white text-neutral-900 dark:text-white rounded-lg font-medium cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors" style={{ borderRadius: '15px 5px 15px 5px / 5px 15px 5px 15px' }}>
                             Sketch
                         </button>
                     </div>
@@ -405,7 +405,7 @@ const ButtonDetail = () => {
             <div className="pt-32 pb-24 min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center">
                 <div className="text-center">
                     <p className="text-red-600 dark:text-red-400 mb-4">{error || 'Button not found'}</p>
-                    <button 
+                    <button
                         onClick={() => navigate('/buttons')}
                         className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
                     >
@@ -437,7 +437,7 @@ const ButtonDetail = () => {
                             <h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">{button.title}</h1>
                             <p className="text-neutral-600 dark:text-neutral-400">{button.description}</p>
                         </div>
-                        
+
                         <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-8 shadow-lg">
                             <div className="pointer-events-none flex items-center justify-center min-h-[400px] relative overflow-hidden">
                                 {/* Background decorative elements */}
@@ -453,26 +453,24 @@ const ButtonDetail = () => {
                     <div className="space-y-6">
                         <div>
                             <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Code</h2>
-                            
+
                             {/* Tabs */}
                             <div className="flex gap-2 mb-4">
                                 <button
                                     onClick={() => setActiveTab('tailwind')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'tailwind'
-                                            ? 'bg-primary-600 text-white'
-                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'tailwind'
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                        }`}
                                 >
                                     Tailwind React
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('css')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'css'
-                                            ? 'bg-primary-600 text-white'
-                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'css'
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                        }`}
                                 >
                                     Normal CSS
                                 </button>
@@ -513,9 +511,9 @@ const ButtonDetail = () => {
                                 </div>
 
                                 {/* Code Content */}
-                                <div 
+                                <div
                                     className={`p-4 overflow-x-auto max-h-[600px] overflow-y-auto card-scrollbar ${isScrolling ? 'scrolling' : ''}`}
-                                    onScroll={(e) => {
+                                    onScroll={(_e) => {
                                         setIsScrolling(true);
                                         clearTimeout((window as any).scrollTimeout);
                                         (window as any).scrollTimeout = setTimeout(() => {
@@ -541,8 +539,8 @@ const ButtonDetail = () => {
                                             fontSize: '14px',
                                         }}
                                     >
-                                        {activeTab === 'tailwind' 
-                                            ? (button.code || '') 
+                                        {activeTab === 'tailwind'
+                                            ? (button.code || '')
                                             : (button.cssCode || generateCSSFromTailwind(button.code || ''))}
                                     </SyntaxHighlighter>
                                 </div>

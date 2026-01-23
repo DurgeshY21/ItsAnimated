@@ -13,7 +13,7 @@ const InteractionDetail = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isScrolling, setIsScrolling] = useState(false);
-    
+
     // State for interactive components
     const [liked, setLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(42);
@@ -35,7 +35,7 @@ const InteractionDetail = () => {
     const [checkboxChecked, setCheckboxChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('option1');
     const [chipSelected, setChipSelected] = useState<string[]>([]);
-    const [avatarStatus, setAvatarStatus] = useState(true);
+    const [avatarStatus, _setAvatarStatus] = useState(true);
     const [rippleActive, setRippleActive] = useState(false);
     const [floatingLabelFocused, setFloatingLabelFocused] = useState(false);
     const [floatingLabelValue, setFloatingLabelValue] = useState('');
@@ -52,19 +52,19 @@ const InteractionDetail = () => {
     useEffect(() => {
         setLoading(true);
         setError(null);
-        
+
         // Load interaction data from localStorage
         const savedData = localStorage.getItem('interactionData');
         console.log('Loading interaction detail, id:', id);
         console.log('Saved data:', savedData);
-        
+
         if (savedData) {
             try {
                 const interactions = JSON.parse(savedData);
                 console.log('Parsed interactions:', interactions);
                 const found = interactions.find((i: any) => i.id === id);
                 console.log('Found interaction:', found);
-                
+
                 if (found) {
                     setInteraction(found);
                     setLoading(false);
@@ -85,28 +85,28 @@ const InteractionDetail = () => {
         }
     }, [id]);
 
-    const generateCSSFromTailwind = (tailwindCode: string): string => {
+    const generateCSSFromTailwind = (_tailwindCode: string): string => {
         // Simple CSS generation - you can enhance this
         return `/* CSS equivalent for ${interaction?.name || 'Component'} */\n\n` +
-               `/* Note: This is a simplified conversion. For full Tailwind to CSS conversion, use a tool like tailwindcss.com */\n\n` +
-               `/* Component styles would go here based on the Tailwind classes used */\n\n` +
-               `/* Example utility classes: */\n` +
-               `.flex { display: flex; }\n` +
-               `.items-center { align-items: center; }\n` +
-               `.justify-center { justify-content: center; }\n` +
-               `.rounded-xl { border-radius: 0.75rem; }\n` +
-               `.transition-all { transition: all 0.3s ease; }\n` +
-               `.duration-300 { transition-duration: 300ms; }\n` +
-               `.cursor-pointer { cursor: pointer; }\n` +
-               `.font-medium { font-weight: 500; }\n` +
-               `.bg-primary-600 { background-color: rgb(116, 0, 255); }\n` +
-               `.text-white { color: rgb(255, 255, 255); }\n` +
-               `.hover\\:bg-primary-700:hover { background-color: rgb(75, 0, 166); }\n`;
+            `/* Note: This is a simplified conversion. For full Tailwind to CSS conversion, use a tool like tailwindcss.com */\n\n` +
+            `/* Component styles would go here based on the Tailwind classes used */\n\n` +
+            `/* Example utility classes: */\n` +
+            `.flex { display: flex; }\n` +
+            `.items-center { align-items: center; }\n` +
+            `.justify-center { justify-content: center; }\n` +
+            `.rounded-xl { border-radius: 0.75rem; }\n` +
+            `.transition-all { transition: all 0.3s ease; }\n` +
+            `.duration-300 { transition-duration: 300ms; }\n` +
+            `.cursor-pointer { cursor: pointer; }\n` +
+            `.font-medium { font-weight: 500; }\n` +
+            `.bg-primary-600 { background-color: rgb(116, 0, 255); }\n` +
+            `.text-white { color: rgb(255, 255, 255); }\n` +
+            `.hover\\:bg-primary-700:hover { background-color: rgb(75, 0, 166); }\n`;
     };
 
     const handleCopy = () => {
-        const codeToCopy = activeTab === 'tailwind' 
-            ? interaction?.code 
+        const codeToCopy = activeTab === 'tailwind'
+            ? interaction?.code
             : (interaction?.cssCode || generateCSSFromTailwind(interaction?.code || ''));
         if (codeToCopy) {
             navigator.clipboard.writeText(codeToCopy);
@@ -117,7 +117,7 @@ const InteractionDetail = () => {
 
     const renderPreview = () => {
         if (!interaction) return null;
-        
+
         // Recreate preview based on interaction ID
         switch (interaction.id) {
             case 'like-button':
@@ -125,9 +125,8 @@ const InteractionDetail = () => {
                     <div className="flex justify-center">
                         <button
                             onClick={(e) => { e.stopPropagation(); handleLike(); }}
-                            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-300 ${
-                                liked ? 'bg-red-50 text-red-500 scale-105' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300'
-                            }`}
+                            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-300 ${liked ? 'bg-red-50 text-red-500 scale-105' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300'
+                                }`}
                         >
                             <svg className={`w-5 h-5 transition-all duration-300 ${liked ? 'scale-125 fill-red-500' : 'fill-none'}`} stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -188,11 +187,10 @@ const InteractionDetail = () => {
                     <div className="flex justify-center">
                         <button
                             onClick={(e) => { e.stopPropagation(); setBookmarked(!bookmarked); }}
-                            className={`p-3 rounded-xl transition-all duration-300 ${
-                                bookmarked
-                                    ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-600'
-                                    : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                            }`}
+                            className={`p-3 rounded-xl transition-all duration-300 ${bookmarked
+                                ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-600'
+                                : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                                }`}
                         >
                             <svg
                                 className={`w-6 h-6 transition-all duration-500 ${bookmarked ? 'scale-110 fill-primary-600' : 'fill-none'}`}
@@ -209,11 +207,10 @@ const InteractionDetail = () => {
                     <div className="flex justify-center">
                         <button
                             onClick={(e) => { e.stopPropagation(); setFollowing(!following); }}
-                            className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
-                                following
-                                    ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900/30'
-                                    : 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg shadow-primary-600/30'
-                            }`}
+                            className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${following
+                                ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900/30'
+                                : 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg shadow-primary-600/30'
+                                }`}
                         >
                             {following ? 'Following' : 'Follow'}
                         </button>
@@ -313,14 +310,12 @@ const InteractionDetail = () => {
                     <div className="flex justify-center">
                         <button
                             onClick={(e) => { e.stopPropagation(); setToggled(!toggled); }}
-                            className={`relative w-14 h-7 rounded-full transition-all duration-300 ${
-                                toggled ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
-                            }`}
+                            className={`relative w-14 h-7 rounded-full transition-all duration-300 ${toggled ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
+                                }`}
                         >
                             <span
-                                className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full transition-transform duration-300 shadow-md ${
-                                    toggled ? 'translate-x-7' : 'translate-x-0'
-                                }`}
+                                className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full transition-transform duration-300 shadow-md ${toggled ? 'translate-x-7' : 'translate-x-0'
+                                    }`}
                             />
                         </button>
                     </div>
@@ -354,9 +349,9 @@ const InteractionDetail = () => {
                         </div>
                         <div className="flex justify-between mt-2">
                             <button
-                                onClick={(e) => { 
-                                    e.stopPropagation(); 
-                                    setProgress(Math.max(0, progress - 10)); 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setProgress(Math.max(0, progress - 10));
                                 }}
                                 className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer transition-colors"
                             >
@@ -364,9 +359,9 @@ const InteractionDetail = () => {
                             </button>
                             <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300">{progress}%</span>
                             <button
-                                onClick={(e) => { 
-                                    e.stopPropagation(); 
-                                    setProgress(Math.min(100, progress + 10)); 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setProgress(Math.min(100, progress + 10));
                                 }}
                                 className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer transition-colors"
                             >
@@ -442,9 +437,8 @@ const InteractionDetail = () => {
                                 className="w-full px-4 py-3 pl-10 bg-neutral-100 dark:bg-neutral-700 border-2 border-transparent rounded-xl focus:border-primary-500 focus:bg-white dark:focus:bg-neutral-800 focus:outline-none transition-all duration-300 text-neutral-900 dark:text-white placeholder-neutral-400"
                             />
                             <svg
-                                className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
-                                    searchFocused ? 'text-primary-500' : 'text-neutral-400'
-                                }`}
+                                className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${searchFocused ? 'text-primary-500' : 'text-neutral-400'
+                                    }`}
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -462,11 +456,10 @@ const InteractionDetail = () => {
                                 <button
                                     key={tab}
                                     onClick={(e) => { e.stopPropagation(); setActiveTabState(index); }}
-                                    className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                                        activeTabState === index
-                                            ? 'bg-white dark:bg-neutral-800 text-primary-600 dark:text-primary-400 shadow-sm'
-                                            : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
-                                    }`}
+                                    className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${activeTabState === index
+                                        ? 'bg-white dark:bg-neutral-800 text-primary-600 dark:text-primary-400 shadow-sm'
+                                        : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
+                                        }`}
                                 >
                                     {tab}
                                 </button>
@@ -553,17 +546,16 @@ const InteractionDetail = () => {
                                 key={chip}
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    setChipSelected(prev => 
-                                        prev.includes(chip) 
+                                    setChipSelected(prev =>
+                                        prev.includes(chip)
                                             ? prev.filter(c => c !== chip)
                                             : [...prev, chip]
                                     );
                                 }}
-                                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                                    chipSelected.includes(chip)
-                                        ? 'bg-primary-600 text-white scale-105'
-                                        : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                                }`}
+                                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${chipSelected.includes(chip)
+                                    ? 'bg-primary-600 text-white scale-105'
+                                    : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                                    }`}
                             >
                                 {chip}
                             </button>
@@ -690,11 +682,10 @@ const InteractionDetail = () => {
                             <button
                                 key={page}
                                 onClick={(e) => { e.stopPropagation(); setPaginationPage(page); }}
-                                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                                    paginationPage === page
-                                        ? 'bg-primary-600 text-white'
-                                        : 'hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200'
-                                }`}
+                                className={`px-4 py-2 rounded-lg font-medium transition-all ${paginationPage === page
+                                    ? 'bg-primary-600 text-white'
+                                    : 'hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200'
+                                    }`}
                             >
                                 {page}
                             </button>
@@ -823,11 +814,10 @@ const InteractionDetail = () => {
                     <div className="w-full px-4">
                         <div
                             onClick={(e) => { e.stopPropagation(); setFileUploaded(true); }}
-                            className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${
-                                fileUploaded
-                                    ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
-                                    : 'border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-500'
-                            }`}
+                            className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${fileUploaded
+                                ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
+                                : 'border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-500'
+                                }`}
                         >
                             {fileUploaded ? (
                                 <div className="flex flex-col items-center gap-2">
@@ -854,13 +844,12 @@ const InteractionDetail = () => {
                             {[1, 2, 3, 4].map((step, index) => (
                                 <div key={step} className="flex items-center flex-1">
                                     <div className="flex flex-col items-center">
-                                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium transition-all ${
-                                            step < stepperStep
-                                                ? 'bg-green-500 text-white'
-                                                : step === stepperStep
+                                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium transition-all ${step < stepperStep
+                                            ? 'bg-green-500 text-white'
+                                            : step === stepperStep
                                                 ? 'bg-primary-600 text-white scale-110'
                                                 : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-500'
-                                        }`}>
+                                            }`}>
                                             {step < stepperStep ? (
                                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -872,9 +861,8 @@ const InteractionDetail = () => {
                                         <span className="text-xs mt-2 text-neutral-600 dark:text-neutral-400">Step {step}</span>
                                     </div>
                                     {index < 3 && (
-                                        <div className={`flex-1 h-1 mx-2 transition-all ${
-                                            step < stepperStep ? 'bg-green-500' : 'bg-neutral-200 dark:bg-neutral-700'
-                                        }`} />
+                                        <div className={`flex-1 h-1 mx-2 transition-all ${step < stepperStep ? 'bg-green-500' : 'bg-neutral-200 dark:bg-neutral-700'
+                                            }`} />
                                     )}
                                 </div>
                             ))}
@@ -959,7 +947,7 @@ const InteractionDetail = () => {
                             <h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">{interaction.name}</h1>
                             <p className="text-neutral-600 dark:text-neutral-400">{interaction.description}</p>
                         </div>
-                        
+
                         <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-8 shadow-lg">
                             <div className="pointer-events-none flex items-center justify-center min-h-[400px] relative overflow-hidden">
                                 {/* Background decorative elements */}
@@ -975,26 +963,24 @@ const InteractionDetail = () => {
                     <div className="space-y-6">
                         <div>
                             <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Code</h2>
-                            
+
                             {/* Tabs */}
                             <div className="flex gap-2 mb-4">
                                 <button
                                     onClick={() => setActiveTab('tailwind')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'tailwind'
-                                            ? 'bg-primary-600 text-white'
-                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'tailwind'
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                        }`}
                                 >
                                     Tailwind React
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('css')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'css'
-                                            ? 'bg-primary-600 text-white'
-                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'css'
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                        }`}
                                 >
                                     Normal CSS
                                 </button>
@@ -1035,9 +1021,9 @@ const InteractionDetail = () => {
                                 </div>
 
                                 {/* Code Content */}
-                                <div 
+                                <div
                                     className={`p-4 overflow-x-auto max-h-[600px] overflow-y-auto card-scrollbar ${isScrolling ? 'scrolling' : ''}`}
-                                    onScroll={(e) => {
+                                    onScroll={(_e) => {
                                         setIsScrolling(true);
                                         clearTimeout((window as any).scrollTimeout);
                                         (window as any).scrollTimeout = setTimeout(() => {
@@ -1063,8 +1049,8 @@ const InteractionDetail = () => {
                                             fontSize: '14px',
                                         }}
                                     >
-                                        {activeTab === 'tailwind' 
-                                            ? (interaction.code || '') 
+                                        {activeTab === 'tailwind'
+                                            ? (interaction.code || '')
                                             : (interaction.cssCode || generateCSSFromTailwind(interaction.code || ''))}
                                     </SyntaxHighlighter>
                                 </div>

@@ -3,41 +3,41 @@ import { useNavigate } from 'react-router-dom';
 
 const Inputs = () => {
     const navigate = useNavigate();
-    
+
     // State for various inputs
     const [basicText, setBasicText] = useState('');
     const [basicEmail, setBasicEmail] = useState('');
     const [basicPassword, setBasicPassword] = useState('');
     const [basicNumber, setBasicNumber] = useState('');
     const [basicTextarea, setBasicTextarea] = useState('');
-    
+
     const [animatedText, setAnimatedText] = useState('');
     const [animatedFocused, setAnimatedFocused] = useState(false);
     const [floatingLabel, setFloatingLabel] = useState('');
     const [floatingFocused, setFloatingFocused] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    
+
     const [formName, setFormName] = useState('');
-    const [formEmail, setFormEmail] = useState('');
-    const [formPhone, setFormPhone] = useState('');
-    const [formMessage, setFormMessage] = useState('');
+    const [_formEmail, _setFormEmail] = useState('');
+    const [_formPhone, _setFormPhone] = useState('');
+    const [_formMessage, _setFormMessage] = useState('');
     const [formSelect, setFormSelect] = useState('');
     const [formDate, setFormDate] = useState('');
-    
+
     const [sliderValue, setSliderValue] = useState(50);
     const [toggleOn, setToggleOn] = useState(false);
     const [checkboxChecked, setCheckboxChecked] = useState(false);
-    const [radioValue, setRadioValue] = useState('option1');
+    const [_radioValue, _setRadioValue] = useState('option1');
     const [rating, setRating] = useState(0);
     const [selectedChip, setSelectedChip] = useState<string[]>([]);
-    
+
     const [smartSearch, setSmartSearch] = useState('');
     const [smartPassword, setSmartPassword] = useState('');
     const [smartPasswordVisible, setSmartPasswordVisible] = useState(false);
     const [smartCurrency, setSmartCurrency] = useState('');
     const [smartTags, setSmartTags] = useState<string[]>([]);
     const [smartTagInput, setSmartTagInput] = useState('');
-    
+
     const [darkText, setDarkText] = useState('');
     const [darkEmail, setDarkEmail] = useState('');
     const [darkPassword, setDarkPassword] = useState('');
@@ -58,8 +58,8 @@ const Inputs = () => {
     };
 
     const handleChipToggle = (chip: string) => {
-        setSelectedChip(prev => 
-            prev.includes(chip) 
+        setSelectedChip(prev =>
+            prev.includes(chip)
                 ? prev.filter(c => c !== chip)
                 : [...prev, chip]
         );
@@ -188,7 +188,7 @@ const Inputs = () => {
     className="w-full px-4 py-3 rounded-lg border border-neutral-300 bg-white text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
 />`,
         },
-        
+
         // Animated Category
         {
             category: 'Animated',
@@ -240,11 +240,10 @@ const Inputs = () => {
                             onBlur={() => setFloatingFocused(false)}
                             className="w-full px-4 pt-6 pb-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
                         />
-                        <label className={`absolute left-4 transition-all duration-300 pointer-events-none ${
-                            floatingFocused || floatingLabel 
-                                ? 'top-2 text-xs text-primary-600 dark:text-primary-400' 
-                                : 'top-3.5 text-sm text-neutral-500 dark:text-neutral-400'
-                        }`}>
+                        <label className={`absolute left-4 transition-all duration-300 pointer-events-none ${floatingFocused || floatingLabel
+                            ? 'top-2 text-xs text-primary-600 dark:text-primary-400'
+                            : 'top-3.5 text-sm text-neutral-500 dark:text-neutral-400'
+                            }`}>
                             Full Name
                         </label>
                     </div>
@@ -303,7 +302,7 @@ const [focused, setFocused] = useState(false);
     />
 </div>`,
         },
-        
+
         // Form Category
         {
             category: 'Form',
@@ -421,7 +420,7 @@ const [focused, setFocused] = useState(false);
     />
 </div>`,
         },
-        
+
         // Interactive Category
         {
             category: 'Interactive',
@@ -465,13 +464,11 @@ const [focused, setFocused] = useState(false);
                 <div className="flex justify-center" onClick={(e) => e.stopPropagation()}>
                     <button
                         onClick={() => setToggleOn(!toggleOn)}
-                        className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${
-                            toggleOn ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
-                        }`}
+                        className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${toggleOn ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
+                            }`}
                     >
-                        <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${
-                            toggleOn ? 'translate-x-7' : 'translate-x-0'
-                        }`}></div>
+                        <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${toggleOn ? 'translate-x-7' : 'translate-x-0'
+                            }`}></div>
                     </button>
                 </div>
             ),
@@ -498,15 +495,13 @@ const [focused, setFocused] = useState(false);
                             checked={checkboxChecked}
                             onChange={() => setCheckboxChecked(!checkboxChecked)}
                         />
-                        <div className={`w-6 h-6 flex items-center justify-center rounded-md border-2 transition-all duration-300 ${
-                            checkboxChecked
-                                ? 'bg-primary-600 border-primary-600'
-                                : 'bg-white dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600 group-hover:border-primary-400'
-                        }`}>
+                        <div className={`w-6 h-6 flex items-center justify-center rounded-md border-2 transition-all duration-300 ${checkboxChecked
+                            ? 'bg-primary-600 border-primary-600'
+                            : 'bg-white dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600 group-hover:border-primary-400'
+                            }`}>
                             <svg
-                                className={`w-4 h-4 text-white transition-all duration-300 ${
-                                    checkboxChecked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                                }`}
+                                className={`w-4 h-4 text-white transition-all duration-300 ${checkboxChecked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                                    }`}
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -514,9 +509,8 @@ const [focused, setFocused] = useState(false);
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <span className={`text-sm font-medium transition-colors duration-300 ${
-                            checkboxChecked ? 'text-primary-600 dark:text-primary-400' : 'text-neutral-600 dark:text-neutral-300'
-                        }`}>
+                        <span className={`text-sm font-medium transition-colors duration-300 ${checkboxChecked ? 'text-primary-600 dark:text-primary-400' : 'text-neutral-600 dark:text-neutral-300'
+                            }`}>
                             Accept terms and conditions
                         </span>
                     </label>
@@ -553,11 +547,10 @@ const [focused, setFocused] = useState(false);
                             className="p-1 transition-all duration-200 cursor-pointer hover:scale-125"
                         >
                             <svg
-                                className={`w-8 h-8 transition-all duration-300 ${
-                                    star <= rating
-                                        ? 'text-yellow-400 fill-yellow-400 scale-110'
-                                        : 'text-neutral-300 dark:text-neutral-600 fill-none hover:text-yellow-300'
-                                }`}
+                                className={`w-8 h-8 transition-all duration-300 ${star <= rating
+                                    ? 'text-yellow-400 fill-yellow-400 scale-110'
+                                    : 'text-neutral-300 dark:text-neutral-600 fill-none hover:text-yellow-300'
+                                    }`}
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
                             >
@@ -596,11 +589,10 @@ const [focused, setFocused] = useState(false);
                         <button
                             key={chip}
                             onClick={() => handleChipToggle(chip)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                                selectedChip.includes(chip)
-                                    ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30'
-                                    : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                            }`}
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedChip.includes(chip)
+                                ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30'
+                                : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                                }`}
                         >
                             {chip}
                         </button>
@@ -627,7 +619,7 @@ const handleToggle = (chip: string) => {
     </button>
 ))}`,
         },
-        
+
         // Smart Category
         {
             category: 'Smart',
@@ -854,7 +846,7 @@ const handleRemove = (tag: string) => {
     />
 </div>`,
         },
-        
+
         // Dark Mode Category
         {
             category: 'Dark Mode',
@@ -931,13 +923,11 @@ const handleRemove = (tag: string) => {
                 <div className="flex justify-center" onClick={(e) => e.stopPropagation()}>
                     <button
                         onClick={() => setDarkToggle(!darkToggle)}
-                        className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${
-                            darkToggle ? 'bg-primary-500' : 'bg-neutral-700'
-                        }`}
+                        className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${darkToggle ? 'bg-primary-500' : 'bg-neutral-700'
+                            }`}
                     >
-                        <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${
-                            darkToggle ? 'translate-x-7' : 'translate-x-0'
-                        }`}></div>
+                        <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${darkToggle ? 'translate-x-7' : 'translate-x-0'
+                            }`}></div>
                     </button>
                 </div>
             ),
@@ -955,8 +945,8 @@ const handleRemove = (tag: string) => {
     const categories = ['Basic', 'Animated', 'Form', 'Interactive', 'Smart', 'Dark Mode'];
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-    const filteredInputs = selectedCategory === 'All' 
-        ? inputs 
+    const filteredInputs = selectedCategory === 'All'
+        ? inputs
         : inputs.filter(input => input.category === selectedCategory);
 
     return (
@@ -971,16 +961,15 @@ const handleRemove = (tag: string) => {
                         Production-ready input components for modern applications.
                         <br />Click any input to view details and code.
                     </p>
-                    
+
                     {/* Category Filter */}
                     <div className="flex flex-wrap justify-center gap-2 mb-8">
                         <button
                             onClick={() => setSelectedCategory('All')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                selectedCategory === 'All'
-                                    ? 'bg-primary-600 text-white'
-                                    : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                            }`}
+                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCategory === 'All'
+                                ? 'bg-primary-600 text-white'
+                                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                }`}
                         >
                             All
                         </button>
@@ -988,11 +977,10 @@ const handleRemove = (tag: string) => {
                             <button
                                 key={category}
                                 onClick={() => setSelectedCategory(category)}
-                                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                    selectedCategory === category
-                                        ? 'bg-primary-600 text-white'
-                                        : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                }`}
+                                className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCategory === category
+                                    ? 'bg-primary-600 text-white'
+                                    : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                    }`}
                             >
                                 {category}
                             </button>

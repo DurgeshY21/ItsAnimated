@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Buttons = () => {
@@ -882,7 +881,7 @@ const Buttons = () => {
             preview: (
                 <button className="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center cursor-pointer hover:bg-blue-600 hover:scale-110 transition-all shadow-lg">
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                     </svg>
                 </button>
             )
@@ -987,7 +986,7 @@ const Buttons = () => {
     background-color: #be123c;
 }`,
             preview: (
-                <button className="px-8 py-3 bg-rose-600 text-white font-medium cursor-pointer hover:bg-rose-700 transition-colors shadow-lg" style={{clipPath: 'polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)'}}>
+                <button className="px-8 py-3 bg-rose-600 text-white font-medium cursor-pointer hover:bg-rose-700 transition-colors shadow-lg" style={{ clipPath: 'polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)' }}>
                     Angled
                 </button>
             )
@@ -1059,7 +1058,7 @@ const Buttons = () => {
     }
 }`,
             preview: (
-                <button className="px-8 py-3 bg-white dark:bg-neutral-800 border-2 border-neutral-900 dark:border-white text-neutral-900 dark:text-white rounded-lg font-medium cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors" style={{borderRadius: '15px 5px 15px 5px / 5px 15px 5px 15px'}}>
+                <button className="px-8 py-3 bg-white dark:bg-neutral-800 border-2 border-neutral-900 dark:border-white text-neutral-900 dark:text-white rounded-lg font-medium cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors" style={{ borderRadius: '15px 5px 15px 5px / 5px 15px 5px 15px' }}>
                     Sketch
                 </button>
             )

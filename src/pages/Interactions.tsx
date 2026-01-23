@@ -2,34 +2,48 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Interactions = () => {
-    const [copiedId, setCopiedId] = useState<string | null>(null);
+    const [_copiedId, _setCopiedId] = useState<string | null>(null);
+    const [_searchQuery, _setSearchQuery] = useState('');
+    const [_selectedCategory, _setSelectedCategory] = useState('All');
+
+    // Mock states for previews
+    const [_likeActive, _setLikeActive] = useState(false);
+    const [_bookmarkActive, _setBookmarkActive] = useState(false);
+    const [_notificationCount, _setNotificationCount] = useState(3);
+    const [_toggleActive, _setToggleActive] = useState(false);
+    const [_avatarStatus, _setAvatarStatus] = useState(true);
+    const [_buttonLoading, _setButtonLoading] = useState(false);
+    const [_expandedAccordion, _setExpandedAccordion] = useState<number | null>(null);
+    const [_uploadProgress, _setUploadProgress] = useState(0);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [_dragActive, _setDragActive] = useState(false);
+    const [_skeletonLoading, _setSkeletonLoading] = useState(true);
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [searchFocused, setSearchFocused] = useState(false);
+    const [activeTab, setActiveTab] = useState(0);
+    const [sliderValue, setSliderValue] = useState(50);
     const [liked, setLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(42);
     const [bookmarked, setBookmarked] = useState(false);
     const [notifications, setNotifications] = useState(3);
     const [following, setFollowing] = useState(false);
     const [expanded, setExpanded] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
     const [toggled, setToggled] = useState(false);
     const [starRating, setStarRating] = useState(0);
     const [hoveredStar, setHoveredStar] = useState(0);
     const [progress, setProgress] = useState(45);
     const [loading, setLoading] = useState(false);
-    const [tooltipVisible, setTooltipVisible] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [searchFocused, setSearchFocused] = useState(false);
-    const [activeTab, setActiveTab] = useState(0);
-    const [sliderValue, setSliderValue] = useState(50);
     const [checkboxChecked, setCheckboxChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('option1');
     const [chipSelected, setChipSelected] = useState<string[]>([]);
-    const [avatarStatus, setAvatarStatus] = useState(true);
+    const [avatarStatus] = useState(true);
     const [rippleActive, setRippleActive] = useState(false);
     const [floatingLabelFocused, setFloatingLabelFocused] = useState(false);
     const [floatingLabelValue, setFloatingLabelValue] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
     const [alertVisible, setAlertVisible] = useState(true);
-    const [skeletonLoading, setSkeletonLoading] = useState(true);
+
     const [paginationPage, setPaginationPage] = useState(1);
     const [breadcrumbActive, setBreadcrumbActive] = useState('home');
     const [fabOpen, setFabOpen] = useState(false);
@@ -39,101 +53,9 @@ const Interactions = () => {
     const [stepperStep, setStepperStep] = useState(1);
     const navigate = useNavigate();
 
-    const handleCopy = (id: string, code: string) => {
-        navigator.clipboard.writeText(code);
-        setCopiedId(id);
-        setTimeout(() => setCopiedId(null), 2000);
-    };
 
-    const convertTailwindToCSS = (tailwindCode: string): string => {
-        let css = `/* Component Styles - Converted from Tailwind */\n\n`;
-        
-        // Extract the main component structure
-        const componentMatch = tailwindCode.match(/<(\w+)[^>]*>/);
-        const componentName = componentMatch ? componentMatch[1] : 'component';
-        
-        css += `.${componentName} {\n`;
-        
-        // Common Tailwind to CSS mappings
-        const classMap: { [key: string]: string } = {
-            'bg-primary-600': '  background-color: rgb(116, 0, 255);',
-            'bg-primary-500': '  background-color: rgb(140, 56, 255);',
-            'bg-primary-700': '  background-color: rgb(75, 0, 166);',
-            'bg-neutral-100': '  background-color: rgb(241, 241, 246);',
-            'bg-neutral-200': '  background-color: rgb(226, 226, 232);',
-            'bg-neutral-700': '  background-color: rgb(57, 57, 70);',
-            'bg-neutral-800': '  background-color: rgb(23, 15, 73);',
-            'bg-white': '  background-color: rgb(255, 255, 255);',
-            'bg-black': '  background-color: rgb(0, 0, 0);',
-            'text-white': '  color: rgb(255, 255, 255);',
-            'text-primary-600': '  color: rgb(116, 0, 255);',
-            'text-neutral-600': '  color: rgb(85, 85, 98);',
-            'text-neutral-700': '  color: rgb(57, 57, 70);',
-            'text-neutral-900': '  color: rgb(11, 8, 36);',
-            'rounded-full': '  border-radius: 9999px;',
-            'rounded-xl': '  border-radius: 0.75rem;',
-            'rounded-lg': '  border-radius: 0.5rem;',
-            'px-6': '  padding-left: 1.5rem;\n  padding-right: 1.5rem;',
-            'px-4': '  padding-left: 1rem;\n  padding-right: 1rem;',
-            'py-2.5': '  padding-top: 0.625rem;\n  padding-bottom: 0.625rem;',
-            'py-3': '  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;',
-            'p-3': '  padding: 0.75rem;',
-            'font-medium': '  font-weight: 500;',
-            'font-bold': '  font-weight: 700;',
-            'transition-all': '  transition: all 0.3s ease;',
-            'duration-300': '  transition-duration: 300ms;',
-            'cursor-pointer': '  cursor: pointer;',
-            'flex': '  display: flex;',
-            'items-center': '  align-items: center;',
-            'justify-center': '  justify-content: center;',
-            'gap-2': '  gap: 0.5rem;',
-            'w-full': '  width: 100%;',
-            'h-full': '  height: 100%;',
-            'shadow-lg': '  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);',
-        };
 
-        // Extract classes from the code
-        const classMatches = tailwindCode.match(/className=\{?`([^`]+)`\}?/);
-        if (classMatches) {
-            const classes = classMatches[1].split(/\s+/);
-            classes.forEach(cls => {
-                const cleanClass = cls.replace(/\$\{.*?\}/g, '').trim();
-                if (classMap[cleanClass]) {
-                    css += classMap[cleanClass] + '\n';
-                }
-            });
-        }
 
-        css += `}\n\n`;
-
-        // Add hover states
-        css += `.${componentName}:hover {\n`;
-        css += `  /* Add hover styles here */\n`;
-        if (tailwindCode.includes('hover:bg-primary-700')) {
-            css += `  background-color: rgb(75, 0, 166);\n`;
-        }
-        if (tailwindCode.includes('hover:scale-105')) {
-            css += `  transform: scale(1.05);\n`;
-        }
-        if (tailwindCode.includes('hover:scale-110')) {
-            css += `  transform: scale(1.1);\n`;
-        }
-        css += `}\n\n`;
-
-        // Add utility classes
-        css += `/* Utility Classes */\n`;
-        css += `.transition-all { transition: all 0.3s ease; }\n`;
-        css += `.cursor-pointer { cursor: pointer; }\n`;
-        css += `.flex { display: flex; }\n`;
-        css += `.items-center { align-items: center; }\n`;
-        css += `.justify-center { justify-content: center; }\n`;
-        css += `.rounded-full { border-radius: 9999px; }\n`;
-        css += `.rounded-xl { border-radius: 0.75rem; }\n`;
-        css += `.font-medium { font-weight: 500; }\n`;
-        css += `.font-bold { font-weight: 700; }\n`;
-
-        return css;
-    };
 
 
     const handleLike = () => {
@@ -150,11 +72,10 @@ const Interactions = () => {
                 <div className="flex justify-center">
                     <button
                         onClick={(e) => { e.stopPropagation(); handleLike(); }}
-                        className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-300 cursor-pointer ${
-                            liked
-                                ? 'bg-red-50 text-red-500 scale-105'
-                                : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                        }`}
+                        className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-300 cursor-pointer ${liked
+                            ? 'bg-red-50 text-red-500 scale-105'
+                            : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                            }`}
                     >
                         <svg
                             className={`w-5 h-5 transition-all duration-300 ${liked ? 'scale-125 fill-red-500' : 'fill-none'}`}
@@ -201,11 +122,10 @@ const handleLike = () => {
                 <div className="flex justify-center">
                     <button
                         onClick={(e) => { e.stopPropagation(); setBookmarked(!bookmarked); }}
-                        className={`p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                            bookmarked
-                                ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-600'
-                                : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                        }`}
+                        className={`p-3 rounded-xl transition-all duration-300 cursor-pointer ${bookmarked
+                            ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-600'
+                            : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                            }`}
                     >
                         <svg
                             className={`w-6 h-6 transition-all duration-500 ${bookmarked ? 'scale-110 fill-primary-600' : 'fill-none'}`}
@@ -281,11 +201,10 @@ const handleLike = () => {
                 <div className="flex justify-center">
                     <button
                         onClick={(e) => { e.stopPropagation(); setFollowing(!following); }}
-                        className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 cursor-pointer ${
-                            following
-                                ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900/30'
-                                : 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg shadow-primary-600/30'
-                        }`}
+                        className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 cursor-pointer ${following
+                            ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900/30'
+                            : 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg shadow-primary-600/30'
+                            }`}
                     >
                         {following ? 'Following' : 'Follow'}
                     </button>
@@ -485,14 +404,12 @@ const handleLike = () => {
                 <div className="flex justify-center">
                     <button
                         onClick={(e) => { e.stopPropagation(); setToggled(!toggled); }}
-                        className={`relative w-14 h-7 rounded-full transition-all duration-300 cursor-pointer ${
-                            toggled ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
-                        }`}
+                        className={`relative w-14 h-7 rounded-full transition-all duration-300 cursor-pointer ${toggled ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
+                            }`}
                     >
                         <span
-                            className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full transition-transform duration-300 shadow-md ${
-                                toggled ? 'translate-x-7' : 'translate-x-0'
-                            }`}
+                            className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full transition-transform duration-300 shadow-md ${toggled ? 'translate-x-7' : 'translate-x-0'
+                                }`}
                         />
                     </button>
                 </div>
@@ -746,9 +663,8 @@ const [hoveredStar, setHoveredStar] = useState(0);
                             className="w-full px-4 py-3 pl-10 bg-neutral-100 dark:bg-neutral-700 border-2 border-transparent rounded-xl focus:border-primary-500 focus:bg-white dark:focus:bg-neutral-800 focus:outline-none transition-all duration-300 text-neutral-900 dark:text-white placeholder-neutral-400"
                         />
                         <svg
-                            className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
-                                searchFocused ? 'text-primary-500' : 'text-neutral-400'
-                            }`}
+                            className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${searchFocused ? 'text-primary-500' : 'text-neutral-400'
+                                }`}
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -784,11 +700,10 @@ const [hoveredStar, setHoveredStar] = useState(0);
                             <button
                                 key={tab}
                                 onClick={(e) => { e.stopPropagation(); setActiveTab(index); }}
-                                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 cursor-pointer ${
-                                    activeTab === index
-                                        ? 'bg-white dark:bg-neutral-800 text-primary-600 dark:text-primary-400 shadow-sm'
-                                        : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
-                                }`}
+                                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 cursor-pointer ${activeTab === index
+                                    ? 'bg-white dark:bg-neutral-800 text-primary-600 dark:text-primary-400 shadow-sm'
+                                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
+                                    }`}
                             >
                                 {tab}
                             </button>
@@ -938,17 +853,16 @@ const [hoveredStar, setHoveredStar] = useState(0);
                             key={chip}
                             onClick={(e) => {
                                 e.stopPropagation();
-                                setChipSelected(prev => 
-                                    prev.includes(chip) 
+                                setChipSelected(prev =>
+                                    prev.includes(chip)
                                         ? prev.filter(c => c !== chip)
                                         : [...prev, chip]
                                 );
                             }}
-                            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                                chipSelected.includes(chip)
-                                    ? 'bg-primary-600 text-white scale-105'
-                                    : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                            }`}
+                            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${chipSelected.includes(chip)
+                                ? 'bg-primary-600 text-white scale-105'
+                                : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                                }`}
                         >
                             {chip}
                         </button>
@@ -1161,11 +1075,10 @@ const [value, setValue] = useState('');
                         <button
                             key={page}
                             onClick={(e) => { e.stopPropagation(); setPaginationPage(page); }}
-                            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                                paginationPage === page
-                                    ? 'bg-primary-600 text-white'
-                                    : 'hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200'
-                            }`}
+                            className={`px-4 py-2 rounded-lg font-medium transition-all ${paginationPage === page
+                                ? 'bg-primary-600 text-white'
+                                : 'hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200'
+                                }`}
                         >
                             {page}
                         </button>
@@ -1360,11 +1273,10 @@ const [value, setValue] = useState('');
                 <div className="w-full px-4">
                     <div
                         onClick={(e) => { e.stopPropagation(); setFileUploaded(true); }}
-                        className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${
-                            fileUploaded
-                                ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
-                                : 'border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-500'
-                        }`}
+                        className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${fileUploaded
+                            ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
+                            : 'border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-500'
+                            }`}
                     >
                         {fileUploaded ? (
                             <div className="flex flex-col items-center gap-2">
@@ -1404,13 +1316,12 @@ const [value, setValue] = useState('');
                         {[1, 2, 3, 4].map((step, index) => (
                             <div key={step} className="flex items-center flex-1">
                                 <div className="flex flex-col items-center">
-                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium transition-all ${
-                                        step < stepperStep
-                                            ? 'bg-green-500 text-white'
-                                            : step === stepperStep
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium transition-all ${step < stepperStep
+                                        ? 'bg-green-500 text-white'
+                                        : step === stepperStep
                                             ? 'bg-primary-600 text-white scale-110'
                                             : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-500'
-                                    }`}>
+                                        }`}>
                                         {step < stepperStep ? (
                                             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -1422,9 +1333,8 @@ const [value, setValue] = useState('');
                                     <span className="text-xs mt-2 text-neutral-600 dark:text-neutral-400">Step {step}</span>
                                 </div>
                                 {index < 3 && (
-                                    <div className={`flex-1 h-1 mx-2 transition-all ${
-                                        step < stepperStep ? 'bg-green-500' : 'bg-neutral-200 dark:bg-neutral-700'
-                                    }`} />
+                                    <div className={`flex-1 h-1 mx-2 transition-all ${step < stepperStep ? 'bg-green-500' : 'bg-neutral-200 dark:bg-neutral-700'
+                                        }`} />
                                 )}
                             </div>
                         ))}
@@ -1482,7 +1392,7 @@ const [value, setValue] = useState('');
                                 // Prevent default button behavior
                                 e.preventDefault();
                                 e.stopPropagation();
-                                
+
                                 // Save interaction data to localStorage for detail page
                                 const interactionData = interactions.map(i => ({
                                     id: i.id,
@@ -1490,13 +1400,13 @@ const [value, setValue] = useState('');
                                     code: i.code,
                                     description: i.description
                                 }));
-                                
+
                                 console.log('Saving interaction data:', interactionData);
                                 console.log('Current interaction:', interaction);
                                 console.log('Navigating to:', `/interactions/${interaction.id}`);
-                                
+
                                 localStorage.setItem('interactionData', JSON.stringify(interactionData));
-                                
+
                                 // Small delay to ensure localStorage is set
                                 setTimeout(() => {
                                     navigate(`/interactions/${interaction.id}`);

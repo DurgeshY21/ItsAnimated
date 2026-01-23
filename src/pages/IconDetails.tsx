@@ -51,7 +51,7 @@ const IconDetails = () => {
                             <h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">{icon.name}</h1>
                             <p className="text-neutral-600 dark:text-neutral-400">Category: <span className="font-medium text-primary-600 dark:text-primary-400">{icon.category}</span></p>
                         </div>
-                        
+
                         <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-8 shadow-lg">
                             <div className="flex items-center justify-center min-h-[400px] relative overflow-hidden">
                                 {/* Background decorative elements */}
@@ -67,26 +67,24 @@ const IconDetails = () => {
                     <div className="space-y-6">
                         <div>
                             <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Code</h2>
-                            
+
                             {/* Tabs */}
                             <div className="flex gap-2 mb-4">
                                 <button
                                     onClick={() => setActiveTab('tailwind')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'tailwind'
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'tailwind'
                                             ? 'bg-primary-600 text-white'
                                             : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                        }`}
                                 >
                                     Tailwind React
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('css')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'css'
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'css'
                                             ? 'bg-primary-600 text-white'
                                             : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                        }`}
                                 >
                                     Normal CSS
                                 </button>
@@ -127,9 +125,9 @@ const IconDetails = () => {
                                 </div>
 
                                 {/* Code Content */}
-                                <div 
+                                <div
                                     className={`p-4 overflow-x-auto max-h-[600px] overflow-y-auto card-scrollbar ${isScrolling ? 'scrolling' : ''}`}
-                                    onScroll={(e) => {
+                                    onScroll={(_e) => {
                                         setIsScrolling(true);
                                         clearTimeout((window as any).scrollTimeout);
                                         (window as any).scrollTimeout = setTimeout(() => {

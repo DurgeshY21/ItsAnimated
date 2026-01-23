@@ -12,7 +12,7 @@ const InputDetail = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isScrolling, setIsScrolling] = useState(false);
-    
+
     // State for all input types
     const [basicText, setBasicText] = useState('');
     const [basicEmail, setBasicEmail] = useState('');
@@ -46,7 +46,7 @@ const InputDetail = () => {
     useEffect(() => {
         setLoading(true);
         setError(null);
-        
+
         const savedData = localStorage.getItem('inputData');
         if (savedData) {
             try {
@@ -66,29 +66,29 @@ const InputDetail = () => {
         setLoading(false);
     }, [id]);
 
-    const generateCSSFromTailwind = (tailwindCode: string): string => {
+    const generateCSSFromTailwind = (_tailwindCode: string): string => {
         if (input?.cssCode) {
             return input.cssCode;
         }
         return `/* CSS equivalent for ${input?.name || 'Input'} */\n\n` +
-               `/* Note: This is a simplified conversion. For full Tailwind to CSS conversion, use a tool like tailwindcss.com */\n\n` +
-               `.input {\n` +
-               `  /* Add your custom styles here based on the Tailwind classes */\n` +
-               `  padding: 0.75rem 1rem;\n` +
-               `  border-radius: 0.5rem;\n` +
-               `  border: 1px solid #d1d5db;\n` +
-               `  transition: all 0.3s ease;\n` +
-               `}\n\n` +
-               `.input:focus {\n` +
-               `  outline: none;\n` +
-               `  border-color: #7400ff;\n` +
-               `  box-shadow: 0 0 0 3px rgba(116, 0, 255, 0.1);\n` +
-               `}\n`;
+            `/* Note: This is a simplified conversion. For full Tailwind to CSS conversion, use a tool like tailwindcss.com */\n\n` +
+            `.input {\n` +
+            `  /* Add your custom styles here based on the Tailwind classes */\n` +
+            `  padding: 0.75rem 1rem;\n` +
+            `  border-radius: 0.5rem;\n` +
+            `  border: 1px solid #d1d5db;\n` +
+            `  transition: all 0.3s ease;\n` +
+            `}\n\n` +
+            `.input:focus {\n` +
+            `  outline: none;\n` +
+            `  border-color: #7400ff;\n` +
+            `  box-shadow: 0 0 0 3px rgba(116, 0, 255, 0.1);\n` +
+            `}\n`;
     };
 
     const handleCopy = () => {
-        const codeToCopy = activeTab === 'tailwind' 
-            ? input?.code 
+        const codeToCopy = activeTab === 'tailwind'
+            ? input?.code
             : (input?.cssCode || generateCSSFromTailwind(input?.code || ''));
         if (codeToCopy) {
             navigator.clipboard.writeText(codeToCopy);
@@ -98,8 +98,8 @@ const InputDetail = () => {
     };
 
     const handleChipToggle = (chip: string) => {
-        setSelectedChip(prev => 
-            prev.includes(chip) 
+        setSelectedChip(prev =>
+            prev.includes(chip)
                 ? prev.filter(c => c !== chip)
                 : [...prev, chip]
         );
@@ -118,7 +118,7 @@ const InputDetail = () => {
 
     const renderPreview = () => {
         if (!input) return null;
-        
+
         switch (input.id) {
             case 'basic-text':
                 return (
@@ -209,11 +209,10 @@ const InputDetail = () => {
                                 onBlur={() => setFloatingFocused(false)}
                                 className="w-full px-4 pt-6 pb-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
                             />
-                            <label className={`absolute left-4 transition-all duration-300 pointer-events-none ${
-                                floatingFocused || floatingLabel 
-                                    ? 'top-2 text-xs text-primary-600 dark:text-primary-400' 
-                                    : 'top-3.5 text-sm text-neutral-500 dark:text-neutral-400'
-                            }`}>
+                            <label className={`absolute left-4 transition-all duration-300 pointer-events-none ${floatingFocused || floatingLabel
+                                ? 'top-2 text-xs text-primary-600 dark:text-primary-400'
+                                : 'top-3.5 text-sm text-neutral-500 dark:text-neutral-400'
+                                }`}>
                                 Full Name
                             </label>
                         </div>
@@ -324,13 +323,11 @@ const InputDetail = () => {
                     <div className="flex justify-center pointer-events-auto" onClick={(e) => e.stopPropagation()}>
                         <button
                             onClick={() => setToggleOn(!toggleOn)}
-                            className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${
-                                toggleOn ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
-                            }`}
+                            className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${toggleOn ? 'bg-primary-600' : 'bg-neutral-300 dark:bg-neutral-600'
+                                }`}
                         >
-                            <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${
-                                toggleOn ? 'translate-x-7' : 'translate-x-0'
-                            }`}></div>
+                            <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${toggleOn ? 'translate-x-7' : 'translate-x-0'
+                                }`}></div>
                         </button>
                     </div>
                 );
@@ -344,15 +341,13 @@ const InputDetail = () => {
                                 checked={checkboxChecked}
                                 onChange={() => setCheckboxChecked(!checkboxChecked)}
                             />
-                            <div className={`w-6 h-6 flex items-center justify-center rounded-md border-2 transition-all duration-300 ${
-                                checkboxChecked
-                                    ? 'bg-primary-600 border-primary-600'
-                                    : 'bg-white dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600 group-hover:border-primary-400'
-                            }`}>
+                            <div className={`w-6 h-6 flex items-center justify-center rounded-md border-2 transition-all duration-300 ${checkboxChecked
+                                ? 'bg-primary-600 border-primary-600'
+                                : 'bg-white dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600 group-hover:border-primary-400'
+                                }`}>
                                 <svg
-                                    className={`w-4 h-4 text-white transition-all duration-300 ${
-                                        checkboxChecked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                                    }`}
+                                    className={`w-4 h-4 text-white transition-all duration-300 ${checkboxChecked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                                        }`}
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -360,9 +355,8 @@ const InputDetail = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span className={`text-sm font-medium transition-colors duration-300 ${
-                                checkboxChecked ? 'text-primary-600 dark:text-primary-400' : 'text-neutral-600 dark:text-neutral-300'
-                            }`}>
+                            <span className={`text-sm font-medium transition-colors duration-300 ${checkboxChecked ? 'text-primary-600 dark:text-primary-400' : 'text-neutral-600 dark:text-neutral-300'
+                                }`}>
                                 Accept terms and conditions
                             </span>
                         </label>
@@ -378,11 +372,10 @@ const InputDetail = () => {
                                 className="p-1 transition-all duration-200 cursor-pointer hover:scale-125"
                             >
                                 <svg
-                                    className={`w-8 h-8 transition-all duration-300 ${
-                                        star <= rating
-                                            ? 'text-yellow-400 fill-yellow-400 scale-110'
-                                            : 'text-neutral-300 dark:text-neutral-600 fill-none hover:text-yellow-300'
-                                    }`}
+                                    className={`w-8 h-8 transition-all duration-300 ${star <= rating
+                                        ? 'text-yellow-400 fill-yellow-400 scale-110'
+                                        : 'text-neutral-300 dark:text-neutral-600 fill-none hover:text-yellow-300'
+                                        }`}
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
                                 >
@@ -399,11 +392,10 @@ const InputDetail = () => {
                             <button
                                 key={chip}
                                 onClick={() => handleChipToggle(chip)}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                                    selectedChip.includes(chip)
-                                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30'
-                                        : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                                }`}
+                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedChip.includes(chip)
+                                    ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30'
+                                    : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                                    }`}
                             >
                                 {chip}
                             </button>
@@ -559,13 +551,11 @@ const InputDetail = () => {
                     <div className="flex justify-center pointer-events-auto" onClick={(e) => e.stopPropagation()}>
                         <button
                             onClick={() => setDarkToggle(!darkToggle)}
-                            className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${
-                                darkToggle ? 'bg-primary-500' : 'bg-neutral-700'
-                            }`}
+                            className={`w-16 h-9 rounded-full p-1 transition-all duration-300 cursor-pointer ${darkToggle ? 'bg-primary-500' : 'bg-neutral-700'
+                                }`}
                         >
-                            <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${
-                                darkToggle ? 'translate-x-7' : 'translate-x-0'
-                            }`}></div>
+                            <div className={`w-7 h-7 bg-white rounded-full shadow-md transition-all duration-300 ${darkToggle ? 'translate-x-7' : 'translate-x-0'
+                                }`}></div>
                         </button>
                     </div>
                 );
@@ -594,7 +584,7 @@ const InputDetail = () => {
             <div className="pt-32 pb-24 min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center">
                 <div className="text-center">
                     <p className="text-red-600 dark:text-red-400 mb-4">{error || 'Input not found'}</p>
-                    <button 
+                    <button
                         onClick={() => navigate('/inputs')}
                         className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
                     >
@@ -626,7 +616,7 @@ const InputDetail = () => {
                             <h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">{input.name}</h1>
                             <p className="text-neutral-600 dark:text-neutral-400">{input.description}</p>
                         </div>
-                        
+
                         <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-8 shadow-lg">
                             <div className="pointer-events-none">
                                 {renderPreview()}
@@ -638,26 +628,24 @@ const InputDetail = () => {
                     <div className="space-y-6">
                         <div>
                             <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Code</h2>
-                            
+
                             {/* Tabs */}
                             <div className="flex gap-2 mb-4">
                                 <button
                                     onClick={() => setActiveTab('tailwind')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'tailwind'
-                                            ? 'bg-primary-600 text-white'
-                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'tailwind'
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                        }`}
                                 >
                                     Tailwind React
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('css')}
-                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                                        activeTab === 'css'
-                                            ? 'bg-primary-600 text-white'
-                                            : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
-                                    }`}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'css'
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                                        }`}
                                 >
                                     Normal CSS
                                 </button>
@@ -698,9 +686,9 @@ const InputDetail = () => {
                                 </div>
 
                                 {/* Code Content */}
-                                <div 
+                                <div
                                     className={`p-4 overflow-x-auto max-h-[600px] overflow-y-auto card-scrollbar ${isScrolling ? 'scrolling' : ''}`}
-                                    onScroll={(e) => {
+                                    onScroll={(_e) => {
                                         setIsScrolling(true);
                                         clearTimeout((window as any).scrollTimeout);
                                         (window as any).scrollTimeout = setTimeout(() => {
@@ -726,8 +714,8 @@ const InputDetail = () => {
                                             fontSize: '14px',
                                         }}
                                     >
-                                        {activeTab === 'tailwind' 
-                                            ? (input.code || '') 
+                                        {activeTab === 'tailwind'
+                                            ? (input.code || '')
                                             : (input.cssCode || generateCSSFromTailwind(input.code || ''))}
                                     </SyntaxHighlighter>
                                 </div>
